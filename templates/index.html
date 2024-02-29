@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo API Project Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .code {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        .directory {
+            font-family: Consolas, monospace;
+            white-space: pre;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>API Documentation for the Todo API Project</h1>
+        <blockquote>
+            This project is a Django REST API application that manages Todos and Categories. It provides endpoints for creating, listing, updating, and deleting Todos and Categories. The project uses Django, Django REST framework, and PostgreSQL.
+
+        </blockquote>
+        <div class="section">
+            <h2>Endpoints</h2>
+            <div class="box">
+                <a href="https://todo-api-django.vercel.app/api/v1/">Base URL: https://todo-api-django.vercel.app/api/v1/</a>
+            </div>
+            <div class="box">
+                <h3>Todos</h3>
+                <ul>
+                    <li><strong>POST /todos:</strong> Create a new Todo</li>
+                    <li><strong>GET /list_todos:</strong> List all Todos</li>
+                    <li><strong>GET /todos/&lt;todo_id&gt;/:</strong> Get details of a specific Todo</li>
+                    <li><strong>PUT /todos/&lt;todo_id&gt;/update:</strong> Update a Todo</li>
+                    <li><strong>DELETE /todos/&lt;todo_id&gt;/delete:</strong> Delete a Todo</li>
+                </ul>
+                <h3>Categories</h3>
+                <ul>
+                    <li><strong>POST /create/:</strong> Create a new Category</li>
+                    <li><strong>GET /list/:</strong> List all Categories</li>
+                    <li><strong>GET /details/&lt;category_id&gt;/:</strong> Get details of a specific Category</li>
+                    <li><strong>PUT /update/&lt;category_id&gt;/:</strong> Update a Category</li>
+                    <li><strong>DELETE /delete/&lt;category_id&gt;/:</strong> Delete a Category</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Models</h2>
+            <div class="box">
+                <h3>Category</h3>
+                <ul>
+                    <li><strong>name:</strong> CharField (max_length=50)</li>
+                    <li><strong>description:</strong> TextField</li>
+                </ul>
+                <h3>Todo</h3>
+                <ul>
+                    <li><strong>title:</strong> CharField (max_length=100)</li>
+                    <li><strong>description:</strong> TextField</li>
+                    <li><strong>created_at:</strong> DateTimeField (auto_now_add=True)</li>
+                    <li><strong>due_date:</strong> DateField</li>
+                    <li><strong>priority:</strong> CharField (choices=['Low', 'Medium', 'High'])</li>
+                    <li><strong>completed:</strong> BooleanField (default=False)</li>
+                    <li><strong>category:</strong> ForeignKey to Category (on_delete=models.CASCADE, related_name='todos', null=True, blank=True)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Views Documentation</h2>
+            <div class="box">
+                <h3>Todo Views</h3>
+                <ul>
+                    <li><strong>create_todo:</strong> View to create a new Todo. Accepts POST requests.</li>
+                    <li><strong>list_todos:</strong> View to list all Todos. Accepts GET requests.</li>
+                    <li><strong>get_todo_details:</strong> View to get details of a specific Todo. Accepts GET requests.</li>
+                    <li><strong>update_todo:</strong> View to update a Todo. Accepts PUT requests.</li>
+                    <li><strong>delete_todo:</strong> View to delete a Todo. Accepts DELETE requests.</li>
+                </ul>
+                <h3>Category Views</h3>
+                <ul>
+                    <li><strong>create_category:</strong> View to create a new Category. Accepts POST requests.</li>
+                    <li><strong>list_categories:</strong> View to list all Categories. Accepts GET requests.</li>
+                    <li><strong>get_category_details:</strong> View to get details of a specific Category. Accepts GET requests.</li>
+                    <li><strong>update_category:</strong> View to update a Category. Accepts PUT requests.</li>
+                    <li><strong>delete_category:</strong> View to delete a Category. Accepts DELETE requests.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Structure</h2>
+            <div class="box code">
+                <pre class="directory">
+        │   db.sqlite3
+        │   manage.py
+        │   Readme.md
+        │
+        ├───base
+        │   │   admin.py
+        │   │   apps.py
+        │   │   models.py
+        │   │   serializers.py
+        │   │   tests.py
+        │   │   urls.py
+        │   │   __init__.py
+        │   │
+        │   ├───api
+        │   │   │   category.py
+        │   │   │   todo.py
+        │   │   │
+        │   │   └───__pycache__
+        │   │           category.cpython-311.pyc
+        │   │           todo.cpython-311.pyc
+        │   │
+        │   ├───migrations
+        │   │   │   0001_initial.py
+        │   │   │   __init__.py
+        │   │   │
+        │   │   └───__pycache__
+        │   │           0001_initial.cpython-311.pyc
+        │   │           __init__.cpython-311.pyc
+        │   │
+        │   └───__pycache__
+        │           admin.cpython-311.pyc
+        │           apps.cpython-311.pyc
+        │           models.cpython-311.pyc
+        │           serializers.cpython-311.pyc
+        │           url.cpython-311.pyc
+        │           urls.cpython-311.pyc
+        │           views.cpython-311.pyc
+        │           __init__.cpython-311.pyc
+        │
+        └───TodoApi
+            │   asgi.py
+            │   settings.py
+            │   urls.py
+            │   wsgi.py
+            │   __init__.py
+            │
+            └───__pycache__
+                    settings.cpython-311.pyc
+                    urls.cpython-311.pyc
+                    wsgi.cpython-311.pyc
+                    __init__.cpython-311.pyc
+                </pre>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from base.models import Todo, Category
 from base.serializers import TodoSerializer
+from django.shortcuts import render
 
 @api_view(['POST'])
 def create_todo(request):
@@ -59,4 +60,7 @@ def delete_todo(request, todo_id):
     if request.method == 'DELETE':
         todo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+def home(request):
+    return render(request, 'index.html')
 

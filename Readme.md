@@ -6,6 +6,9 @@ This project is a Django REST API application that manages Todos and Categories.
 
 ## Endpoints
 
+```
+BaseUrl : https://todo-api-django.vercel.app/api/v1/
+```
 ### Todos
 
 - `POST /todos`: Create a new Todo
